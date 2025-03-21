@@ -1,15 +1,20 @@
-import React from "react";
-import { Grid, Box, Typography } from "@mui/material";
-import { Bag2, Milk, User, Cup, Grid1 } from "iconsax-react";
+import React, { useEffect } from "react";
+import { Grid, Box, Typography, IconButton } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../state/store/features/store";
+import { getProductList } from "../state/action/product";
+import SearchBar from "../components/common/SearchBar";
 import CategoryCard from "../components/common/CategoryCard";
 import ProductCard from "../components/common/ProductCard";
-import SearchBar from "../components/common/SearchBar";
+import DropdownButton from "../components/common/button/DropdownButton";
 import fruits from "../assets/fruits.png";
 import bakeryproducts from "../assets/bakeryproducts.png";
 import veg from "../assets/veg.png";
 import dairy from "../assets/dairy.png";
 import snacks from "../assets/snacks.png";
 import juices from "../assets/juices.png";
+import { Bag2, Milk, User, Cup, Grid1, ArrowRight } from "iconsax-react";
+import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
   const categories = [
@@ -21,78 +26,102 @@ const Home: React.FC = () => {
     { icon: <User size="50" color="white" />, title: "Juice & Drinks", items: 845, bgImage: juices },
   ];
 
-  const products = [
-    {
-      image: "/images/cherry.png",
-      category: "Fresh Fruit",
-      name: "Natural Hub Cherry Karonda",
-      price: 49.0,
-      originalPrice: 65.0,
-      rating: 5,
-      weight: "1kg",
-      badge: "NEW" as "NEW",
-    },
-    {
-      image: "/images/lychee.png",
-      category: "Fresh Fruit",
-      name: "Fresh Mango Juice Pack",
-      price: 20.0,
-      originalPrice: 21.0,
-      rating: 3,
-      weight: "2kg",
-    },
-    {
-      image: "/images/dragonfruit.png",
-      category: "Fresh Fruit",
-      name: "Kamalam Fruit",
-      price: 15.0,
-      originalPrice: 17.0,
-      rating: 4,
-      weight: "3pcs",
-      badge: "SALE" as "SALE",
-    },
-    {
-      image: "/images/blueberry.png",
-      category: "Fresh Fruit",
-      name: "Blue Berry",
-      price: 11.0,
-      originalPrice: 12.0,
-      rating: 3,
-      weight: "500g",
-      badge: "SALE" as "SALE",
-    },
-  ];
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch<AppDispatch>();
+  const productList = useSelector((state: RootState) => state.productData?.productList);
+
+  useEffect(() => {
+    dispatch(getProductList());
+  }, [dispatch]);
 
   return (
     <Box sx={{ padding: 3 }}>
-      {/* Search Bar */}
       <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
         <SearchBar />
       </Box>
 
-      {/* Category Grid */}
+      <Box display="flex" alignItems="center" gap={3} p={2}>
+        <DropdownButton title="All Categories" options={["Electronics", "Clothing", "Accessories"]} />
+        <DropdownButton title="Home Categories" options={["Furniture", "Kitchen", "Decor"]} />
+        <DropdownButton title="Pages" options={["About", "Contact", "Blog", "FAQ", "Login", "Register"]} />
+        <DropdownButton title="Offers" options={["Deals", "Discounts", "Coupons"]} />
+      </Box>
+
       <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
         Shop by Categories
       </Typography>
       <Grid container spacing={2} justifyContent="center">
-        {categories.map((category, index) => (
-          <Grid item key={index} xs={12} sm={6} md={4} lg={2}>
+        {categories.map((category: any) => (
+          <Grid item xs={12} sm={6} md={4} lg={2}>
             <CategoryCard {...category} />
           </Grid>
         ))}
       </Grid>
 
-      {/* Products Grid */}
-      <Typography variant="h5" sx={{ fontWeight: "bold", mt: 4, mb: 2 }}>
-        Featured Products
+      <Typography variant="h5" sx={{ fontWeight: "bold", mt: 6, mb: 1, textAlign: "center" }}>
+        <Box component="span" sx={{ color: "#4b5966" }}>Day of the</Box>{" "}
+        <Box component="span" sx={{ color: "#5caf90" }}>Deals</Box>
       </Typography>
-      <Grid container spacing={3} justifyContent="center">
-        {products.map((product, index) => (
-          <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-            <ProductCard {...product} />
-          </Grid>
-        ))}
-      </Grid>
+
+      <Typography variant="body2" sx={{ textAlign: "center", color: "#777777", mb: 4 }}>
+        Don't wait!
+      </Typography>
+      <Box position="relative">
+        <Grid container spacing={3} justifyContent="center">
+          {productList.slice(0, 12).map((product: any, index) => (
+            <Grid item key={product.title || index} xs={12} sm={6} md={4} lg={2}>
+              <ProductCard {...product} />
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* Next Page Arrow */}
+        <Box display="flex" justifyContent="center" mt={2}>
+          <IconButton
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" }); 
+              navigate("/dayDeals");
+            }}
+            sx={{ backgroundColor: "#FF5252", color: "white", "&:hover": { backgroundColor: "#D32F2F" } }}
+          >
+            <ArrowRight />
+          </IconButton>
+        </Box>
+      </Box>
+
+
+      <Typography variant="h5" sx={{ fontWeight: "bold", mt: 6, mb: 1, textAlign: "center" }}>
+        <Box component="span" sx={{ color: "#4b5966" }}>New Arrivals</Box>{" "}
+      </Typography>
+
+      <Typography variant="body2" sx={{ textAlign: "center", color: "#777777", mb: 4 }}>
+        Shop online for new arrivals and get free shipping
+      </Typography>
+
+      <Box position="relative">
+        <Grid container spacing={3} justifyContent="center">
+          {productList.slice(12, 24).map((product: any, index) => (
+            <Grid item key={product.title || index} xs={12} sm={6} md={4} lg={2}>
+              <ProductCard {...product} />
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* Next Page Arrow */}
+        <Box display="flex" justifyContent="center" mt={2}>
+          <IconButton
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" }); 
+              navigate("/newArrivals");
+            }}
+            sx={{ backgroundColor: "#FF5252", color: "white", "&:hover": { backgroundColor: "#D32F2F" } }}
+          >
+            <ArrowRight />
+          </IconButton>
+        </Box>
+      </Box>
+
     </Box>
   );
 };

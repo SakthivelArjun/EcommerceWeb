@@ -16,8 +16,7 @@ const Header: React.FC = () => {
               variant="h6"
               sx={{
                 color: "#FFFFFF",
-                fontWeight: "bold",
-                fontFamily: "helvetica",
+                fontWeight: "bold"
               }}
             >
               Grabbit

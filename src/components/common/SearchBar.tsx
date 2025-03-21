@@ -1,6 +1,6 @@
 import React from "react";
-import { TextField, InputAdornment, IconButton } from "@mui/material";
-import { SearchNormal1, Filter, ElementEqual, Grid1 } from "iconsax-react";
+import { TextField, InputAdornment } from "@mui/material";
+import { SearchNormal1 } from "iconsax-react";
 
 interface SearchBarProps {
   placeholder?: string;
@@ -14,28 +14,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ placeholder = "Search for product
       sx={{
         maxWidth: "800px",
         backgroundColor: "white",
-        borderRadius: "8px",
+        borderRadius: "16px",
         "& .MuiOutlinedInput-root": {
-          paddingRight: "100px",
+          borderRadius: "16px",
+          "& fieldset": { borderColor: "#ccc" }, 
+          "&:hover fieldset": { borderColor: "#5caf90" }, 
+          "&.Mui-focused fieldset": { borderColor: "#5caf90" }, 
         },
       }}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
             <SearchNormal1 size="24" color="#5caf90" />
-          </InputAdornment>
-        ),
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton>
-              <Filter size="24" color="#5caf90" />
-            </IconButton>
-            <IconButton>
-              <ElementEqual size="24" color="#5caf90" />
-            </IconButton>
-            <IconButton>
-              <Grid1 size="24" color="#5caf90" />
-            </IconButton>
           </InputAdornment>
         ),
       }}

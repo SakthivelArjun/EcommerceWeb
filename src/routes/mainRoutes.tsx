@@ -1,7 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 import MainLayout from '../layouts/MainLayout';
-import Products from '../pages/Products';
+import DayDeals from '../pages/dayDeals';
+import NewArrivals from '../pages/newArrivals';
 
 
 
@@ -11,7 +12,8 @@ const RoutesApp = () => {
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/" element={<MainLayout />}>
                 <Route path="home" element={<Home />} />
-                <Route path="product" element={<Products />} />
+                <Route path="dayDeals" element={<DayDeals />} />
+                <Route path="newArrivals" element={<NewArrivals />} />
             </Route>
         </Routes >
     );
