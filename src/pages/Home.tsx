@@ -4,28 +4,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../state/store/features/store";
 import { getProductList } from "../state/action/product";
 import SearchBar from "../components/common/SearchBar";
-import CategoryCard from "../components/common/CategoryCard";
+// import CategoryCard from "../components/common/CategoryCard";
 import ProductCard from "../components/common/ProductCard";
 import DropdownButton from "../components/common/button/DropdownButton";
-import fruits from "../assets/fruits.png";
-import bakeryproducts from "../assets/bakeryproducts.png";
-import veg from "../assets/veg.png";
-import dairy from "../assets/dairy.png";
-import snacks from "../assets/snacks.png";
-import juices from "../assets/juices.png";
-import { Bag2, Milk, User, Cup, Grid1, ArrowRight } from "iconsax-react";
+// import fruits from "../assets/fruits.png";
+// import bakeryproducts from "../assets/bakeryproducts.png";
+// import veg from "../assets/veg.png";
+// import dairy from "../assets/dairy.png";
+// import snacks from "../assets/snacks.png";
+// import juices from "../assets/juices.png";
+import { ArrowRight } from "iconsax-react";
 import { useNavigate } from "react-router-dom";
 import OffersCarousel from "../components/common/OffersCarousel";
 
 const Home: React.FC = () => {
-  const categories = [
-    { icon: <Bag2 size="50" color="white" />, title: "Fruits", items: 320, discount: 30, bgImage: fruits },
-    { icon: <Cup size="50" color="white" />, title: "Bakery", items: 65, bgImage: bakeryproducts },
-    { icon: <Grid1 size="50" color="white" />, title: "Vegetables", items: 548, discount: 15, bgImage: veg },
-    { icon: <Milk size="50" color="white" />, title: "Dairy & Milk", items: 48, discount: 10, bgImage: dairy },
-    { icon: <Bag2 size="50" color="white" />, title: "Snack & Spice", items: 59, bgImage: snacks },
-    { icon: <User size="50" color="white" />, title: "Juice & Drinks", items: 845, bgImage: juices },
-  ];
+  // const categories = [
+  //   { icon: <Bag2 size="50" color="white" />, title: "Fruits", items: 320, discount: 30, bgImage: fruits },
+  //   { icon: <Cup size="50" color="white" />, title: "Bakery", items: 65, bgImage: bakeryproducts },
+  //   { icon: <Grid1 size="50" color="white" />, title: "Vegetables", items: 548, discount: 15, bgImage: veg },
+  //   { icon: <Milk size="50" color="white" />, title: "Dairy & Milk", items: 48, discount: 10, bgImage: dairy },
+  //   { icon: <Bag2 size="50" color="white" />, title: "Snack & Spice", items: 59, bgImage: snacks },
+  //   { icon: <User size="50" color="white" />, title: "Juice & Drinks", items: 845, bgImage: juices },
+  // ];
 
   const navigate = useNavigate();
 
