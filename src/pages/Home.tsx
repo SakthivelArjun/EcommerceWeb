@@ -15,6 +15,7 @@ import snacks from "../assets/snacks.png";
 import juices from "../assets/juices.png";
 import { Bag2, Milk, User, Cup, Grid1, ArrowRight } from "iconsax-react";
 import { useNavigate } from "react-router-dom";
+import OffersCarousel from "../components/common/OffersCarousel";
 
 const Home: React.FC = () => {
   const categories = [
@@ -48,7 +49,11 @@ const Home: React.FC = () => {
         <DropdownButton title="Offers" options={["Deals", "Discounts", "Coupons"]} />
       </Box>
 
-      <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
+      <Box>
+        <OffersCarousel />
+      </Box>
+
+      {/* <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
         Shop by Categories
       </Typography>
       <Grid container spacing={2} justifyContent="center">
@@ -57,7 +62,7 @@ const Home: React.FC = () => {
             <CategoryCard {...category} />
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
 
       <Typography variant="h5" sx={{ fontWeight: "bold", mt: 6, mb: 1, textAlign: "center" }}>
         <Box component="span" sx={{ color: "#4b5966" }}>Day of the</Box>{" "}
@@ -80,7 +85,7 @@ const Home: React.FC = () => {
         <Box display="flex" justifyContent="center" mt={2}>
           <IconButton
             onClick={() => {
-              window.scrollTo({ top: 0, behavior: "smooth" }); 
+              window.scrollTo({ top: 0, behavior: "smooth" });
               navigate("/dayDeals");
             }}
             sx={{ backgroundColor: "#FF5252", color: "white", "&:hover": { backgroundColor: "#D32F2F" } }}
@@ -112,7 +117,7 @@ const Home: React.FC = () => {
         <Box display="flex" justifyContent="center" mt={2}>
           <IconButton
             onClick={() => {
-              window.scrollTo({ top: 0, behavior: "smooth" }); 
+              window.scrollTo({ top: 0, behavior: "smooth" });
               navigate("/newArrivals");
             }}
             sx={{ backgroundColor: "#FF5252", color: "white", "&:hover": { backgroundColor: "#D32F2F" } }}

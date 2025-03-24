@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Grid, Toolbar, Typography, IconButton } from "@mui/material";
-import { ShoppingCart, Bag2, NotificationFavorite, User } from "iconsax-react";
+import { Bag2, NotificationFavorite, User } from "iconsax-react";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const Header: React.FC = () => {
@@ -9,17 +9,8 @@ const Header: React.FC = () => {
       <Toolbar>
         <Grid container alignItems="center">
           <Grid item xs={6} sm={4} md={3} display="flex" alignItems="center">
-            <IconButton edge="start" color="inherit">
-              <ShoppingCart size="40" color="#FFFFFF" />
-            </IconButton>
-            <Typography
-              variant="h6"
-              sx={{
-                color: "#FFFFFF",
-                fontWeight: "bold"
-              }}
-            >
-              Grabbit
+            <Typography variant="h5" sx={{ fontWeight: "bold", color: "#2D3748" }}>
+              <span style={{ color: "#fff" }}>🛍️ Grab</span>it
             </Typography>
           </Grid>
 

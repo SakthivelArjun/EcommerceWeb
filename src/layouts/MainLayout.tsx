@@ -11,7 +11,7 @@ const MainLayout: React.FC = () => {
       <Header />
 
       {/* Main Content - Outlet */}
-      <Box component="main" flexGrow={1} p={2} mt={8}> 
+      <Box component="main" flexGrow={1} p={2} mt={8}>
         <Outlet />
       </Box>
 
