@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import {
-  Card, CardMedia, CardContent, Typography,
-  Box
+  Card, CardMedia, CardContent, Typography, Box, IconButton
 } from "@mui/material";
-import { Star } from "iconsax-react";
+import { Star, ShoppingCart, Heart, Eye } from "iconsax-react";
 import ProductModal from "./ProductModal";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../state/store/features/cartData";
 
 interface ProductCardProps {
+  id: number;
   category: string;
   title: string;
   description: string;
@@ -15,18 +17,31 @@ interface ProductCardProps {
   rating: number;
   stock: number;
   images: any[];
+  onAddToCart: () => void;
+  onAddToWishlist: () => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = (props) => {
   const [open, setOpen] = useState(false);
-  const { images, category, title, price, discountPercentage, rating, stock } = props;
+  const [hovered, setHovered] = useState(false);
+  const { images, category, title, price, discountPercentage, rating, stock, onAddToWishlist } = props;
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ title, price, images }));
+  };
 
   const originalPrice = price + (price * discountPercentage) / 100;
   const badge = stock < 5 ? "Low Stock" : discountPercentage > 0 ? "SALE" : undefined;
 
   return (
     <>
-      <Box sx={{ cursor: "pointer", position: "relative" }} onClick={() => setOpen(true)}>
+      <Box 
+        sx={{ cursor: "pointer", position: "relative" }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
         <Card
           sx={{
             borderRadius: 2,
@@ -59,7 +74,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
 
           <CardMedia
             component="img"
-            image={images && images.length > 0 ? images[0] : "https://via.placeholder.com/150"}
+            image={images[0]}
             alt={title}
             sx={{
               borderRadius: 2,
@@ -68,6 +83,29 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
               mb: 1,
             }}
           />
+
+          {hovered && (
+            <Box
+              sx={{
+                position: "absolute",
+                top: 8,
+                left: 8,
+                display: "flex",
+                flexDirection: "column",
+                gap: 1,
+              }}
+            >
+              <IconButton onClick={onAddToWishlist} sx={{ bgcolor: "white", p: 0.5, borderRadius: "50%" }}>
+                <Heart size="20" color="#FF5252" variant="Bold" />
+              </IconButton>
+              <IconButton onClick={handleAddToCart} sx={{ bgcolor: "white", p: 0.5, borderRadius: "50%" }}>
+                <ShoppingCart size="20" color="#2E7D32" variant="Bold" />
+              </IconButton>
+              <IconButton onClick={() => setOpen(true)} sx={{ bgcolor: "white", p: 0.5, borderRadius: "50%" }}>
+                <Eye size="20" color="#1976D2" variant="Bold" />
+              </IconButton>
+            </Box>
+          )}
 
           <CardContent sx={{ p: 1 }}>
             <Typography variant="caption" color="text.secondary">

@@ -26,6 +26,8 @@ const Home: React.FC = () => {
   //   { icon: <Bag2 size="50" color="white" />, title: "Snack & Spice", items: 59, bgImage: snacks },
   //   { icon: <User size="50" color="white" />, title: "Juice & Drinks", items: 845, bgImage: juices },
   // ];
+  
+
 
   const navigate = useNavigate();
 

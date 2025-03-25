@@ -6,7 +6,7 @@ interface ProductModalProps {
   open: boolean;
   onClose: () => void;
   product: {
-    images: string[]; 
+    images: string[];
     title: string;
     description: string;
     price: number;
@@ -30,7 +30,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ open, onClose, product }) =
           <CloseSquare size="24" />
         </IconButton>
       </DialogTitle>
-      
+
       <DialogContent sx={{ p: 3 }}>
         <Grid container spacing={3} alignItems="center">
           {/* Product Images Section */}
@@ -110,13 +110,12 @@ const ProductModal: React.FC<ProductModalProps> = ({ open, onClose, product }) =
             <Box sx={{ display: "flex", gap: 2 }}>
               <Button
                 variant="contained"
-                color="primary"
-                sx={{ flex: 1, display: "flex", alignItems: "center", gap: 1, fontWeight: 600 }}
+                sx={{ flex: 1, display: "flex", alignItems: "center", gap: 1, fontWeight: 600, color: "#fff", backgroundColor: "#5caf90" }}
               >
                 <ShoppingCart size="20" />
                 Add to Cart
               </Button>
-              <Button variant="outlined" onClick={onClose} sx={{ flex: 1, color: "#5caf90",borderColor: "#5caf90", fontWeight: 600 }}>
+              <Button variant="outlined" onClick={onClose} sx={{ flex: 1, color: "#5caf90", borderColor: "#5caf90", fontWeight: 600 }}>
                 Close
               </Button>
             </Box>
