@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 
 const offerImages = [
-    "dist/assets/cover4.png",
-    "dist/assets/cover2.png",
-    "dist/assets/cover3.png",
-    "dist/assets/cover1.png",
-    "dist/assets/cover3.png",
+    "src/dist/assets/cover4.png",
+    "src/dist/assets/cover2.png",
+    "src/dist/assets/cover3.png",
+    "src/dist/assets/cover1.png",
+    "src/dist/assets/cover3.png",
 ];
 
 const OffersCarousel = () => {
