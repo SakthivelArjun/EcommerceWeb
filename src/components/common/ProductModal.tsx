@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, CardMedia, Typography, Box, Button, IconButton, Divider, Grid } from "@mui/material";
 import { Star, CloseSquare, ShoppingCart } from "iconsax-react";
+import ImageZoom from "./ImageZoom";
 
 interface ProductModalProps {
   open: boolean;
@@ -8,7 +9,7 @@ interface ProductModalProps {
   product: {
     images: string[];
     title: string;
-    description: string;
+    description?: string;
     price: number;
     discountPercentage: number;
     rating: number;
@@ -19,7 +20,7 @@ interface ProductModalProps {
 
 const ProductModal: React.FC<ProductModalProps> = ({ open, onClose, product }) => {
   const { images, title, description, price, discountPercentage, rating, stock, weight } = product;
-  const [selectedImage, setSelectedImage] = useState(images[0]); // State for main image
+  const [selectedImage, setSelectedImage] = useState(images[0]);
   const originalPrice = price + (price * discountPercentage) / 100;
 
   return (
@@ -36,21 +37,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ open, onClose, product }) =
           {/* Product Images Section */}
           <Grid item xs={12} md={5}>
             {/* Main Product Image */}
-            <CardMedia
-              component="img"
-              image={selectedImage}
-              alt={title}
-              sx={{ width: "100%", height: 300, objectFit: "contain", borderRadius: 2, boxShadow: 1 }}
-            />
+            <ImageZoom src={selectedImage} alt={title} />
 
             {/* images Images Carousel */}
             <Box sx={{ display: "flex", gap: 1, mt: 2, justifyContent: "center" }}>
-              {images.map((img, index) => (
+              {images.map((img) => (
                 <CardMedia
-                  key={index}
                   component="img"
                   image={img}
-                  alt={`images ${index}`}
+                  alt={`images, ${title}`}
                   sx={{
                     width: 60,
                     height: 60,

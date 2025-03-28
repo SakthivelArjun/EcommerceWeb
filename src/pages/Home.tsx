@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Grid, Box, Typography, IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../state/store/features/store";
-import { getProductList } from "../state/action/product";
+import { addProductToCart, getProductList } from "../state/action/product";
 import SearchBar from "../components/common/SearchBar";
 // import CategoryCard from "../components/common/CategoryCard";
 import ProductCard from "../components/common/ProductCard";
@@ -26,13 +26,17 @@ const Home: React.FC = () => {
   //   { icon: <Bag2 size="50" color="white" />, title: "Snack & Spice", items: 59, bgImage: snacks },
   //   { icon: <User size="50" color="white" />, title: "Juice & Drinks", items: 845, bgImage: juices },
   // ];
-  
+
 
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();
   const productList = useSelector((state: RootState) => state.productData?.productList);
+
+  const handleAddToCart = (product: any) => {
+    dispatch(addProductToCart(product));
+  };
 
   useEffect(() => {
     dispatch(getProductList());
@@ -76,9 +80,21 @@ const Home: React.FC = () => {
       </Typography>
       <Box position="relative">
         <Grid container spacing={3} justifyContent="center">
-          {productList.slice(0, 12).map((product: any, index) => (
-            <Grid item key={product.title || index} xs={12} sm={6} md={4} lg={2}>
-              <ProductCard {...product} />
+          {productList.slice(0, 12).map((product: any) => (
+            <Grid item xs={12} sm={6} md={4} lg={2}>
+              <ProductCard
+                category={product.category}
+                title={product.title}
+                price={product.price}
+                description={product.description}
+                discountPercentage={product.discountPercentage}
+                rating={product.rating}
+                stock={product.stock}
+                images={product.images}
+                onAddToWishlist={() => { }}
+                onToggleCart={() => handleAddToCart(product)}
+                isInCart={false}
+              />
             </Grid>
           ))}
         </Grid>
@@ -110,7 +126,19 @@ const Home: React.FC = () => {
         <Grid container spacing={3} justifyContent="center">
           {productList.slice(12, 24).map((product: any, index) => (
             <Grid item key={product.title || index} xs={12} sm={6} md={4} lg={2}>
-              <ProductCard {...product} />
+              <ProductCard
+                category={product.category}
+                title={product.title}
+                price={product.price}
+                description={product.description}
+                discountPercentage={product.discountPercentage}
+                rating={product.rating}
+                stock={product.stock}
+                images={product.images}
+                onAddToWishlist={() => { }}
+                onToggleCart={() => handleAddToCart(product)}
+                isInCart={false}
+              />
             </Grid>
           ))}
         </Grid>

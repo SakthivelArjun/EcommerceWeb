@@ -1,43 +1,64 @@
 import React, { useState } from "react";
 import {
-  Card, CardMedia, CardContent, Typography, Box, IconButton
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Box,
+  IconButton,
 } from "@mui/material";
 import { Star, ShoppingCart, Heart, Eye } from "iconsax-react";
 import ProductModal from "./ProductModal";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../state/store/features/cartData";
 
 interface ProductCardProps {
-  id: number;
   category: string;
   title: string;
-  description: string;
   price: number;
+  description?: string;
   discountPercentage: number;
   rating: number;
   stock: number;
-  images: any[];
-  onAddToCart: () => void;
+  images: string[];
   onAddToWishlist: () => void;
+  onToggleCart: () => void;
+  isInCart: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = (props) => {
+const ProductCard: React.FC<ProductCardProps> = ({
+  images,
+  category,
+  title,
+  price,
+  discountPercentage,
+  rating,
+  description,
+  stock,
+  onAddToWishlist,
+  onToggleCart,
+  isInCart,
+}) => {
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const { images, category, title, price, discountPercentage, rating, stock, onAddToWishlist } = props;
-
-  const dispatch = useDispatch();
-
-  const handleAddToCart = () => {
-    dispatch(addToCart({ title, price, images }));
-  };
+  const [isWishlisted, setIsWishlisted] = useState(false);
+  const [addCart, setAddCart] = useState(false);
 
   const originalPrice = price + (price * discountPercentage) / 100;
   const badge = stock < 5 ? "Low Stock" : discountPercentage > 0 ? "SALE" : undefined;
 
+  const handleWishlistToggle = () => {
+    setIsWishlisted(!isWishlisted);
+    onAddToWishlist();
+  };
+
+  const handleCartToggle = () => {
+    setAddCart(!addCart);
+    onToggleCart();
+  };
+
+
   return (
     <>
-      <Box 
+      <Box
         sx={{ cursor: "pointer", position: "relative" }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -95,14 +116,19 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
                 gap: 1,
               }}
             >
-              <IconButton onClick={onAddToWishlist} sx={{ bgcolor: "white", p: 0.5, borderRadius: "50%" }}>
-                <Heart size="20" color="#FF5252" variant="Bold" />
+              {/* Wishlist Icon */}
+              <IconButton onClick={handleWishlistToggle} sx={{ bgcolor: "white", p: 0.5, borderRadius: "50%" }}>
+                <Heart size="20" color="#FF5252" variant={isWishlisted ? "Bold" : "Linear"} />
               </IconButton>
-              <IconButton onClick={handleAddToCart} sx={{ bgcolor: "white", p: 0.5, borderRadius: "50%" }}>
-                <ShoppingCart size="20" color="#2E7D32" variant="Bold" />
+
+              {/* Cart Icon */}
+              <IconButton onClick={handleCartToggle} sx={{ bgcolor: "white", p: 0.5, borderRadius: "50%" }}>
+                <ShoppingCart size="20" color="#2E7D32" variant={addCart ? "Bold" : "Linear"} />
               </IconButton>
+
+              {/* View Icon */}
               <IconButton onClick={() => setOpen(true)} sx={{ bgcolor: "white", p: 0.5, borderRadius: "50%" }}>
-                <Eye size="20" color="#1976D2" variant="Bold" />
+                <Eye size="20" color="#1976D2" variant="Linear" />
               </IconButton>
             </Box>
           )}
@@ -111,7 +137,10 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
             <Typography variant="caption" color="text.secondary">
               {category}
             </Typography>
-            <Typography variant="subtitle2" sx={{ fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+            <Typography
+              variant="subtitle2"
+              sx={{ fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+            >
               {title}
             </Typography>
 
@@ -138,7 +167,15 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
       <ProductModal
         open={open}
         onClose={() => setOpen(false)}
-        product={{ ...props, images: props.images || [] }}
+        product={{
+          images: images,
+          title: title,
+          description: description,
+          price: price,
+          discountPercentage: discountPercentage,
+          rating: rating,
+          stock: stock,
+        }}
       />
     </>
   );
