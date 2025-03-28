@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { Box } from "@mui/material";
+import cover1 from '../../assets/cover1.png';
+import cover2 from '../../assets/cover2.png';
+import cover3 from '../../assets/cover3.png';
+import cover4 from '../../assets/cover4.png';
 
-const offerImages = [
-    "src/dist/assets/cover4.png",
-    "src/dist/assets/cover2.png",
-    "src/dist/assets/cover3.png",
-    "src/dist/assets/cover1.png",
-    "src/dist/assets/cover3.png",
-];
+
+const offerImages = [cover4, cover2, cover3, cover1, cover3];
 
 const OffersCarousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);

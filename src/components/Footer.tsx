@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, Grid, IconButton } from "@mui/material";
 import { Facebook, Twitter, LinkedIn, Instagram } from "@mui/icons-material";
+import google1 from '../assets/google1.png';
 
 const Footer: React.FC = () => {
   return (
@@ -16,8 +17,8 @@ const Footer: React.FC = () => {
           </Typography>
           {/* Download Buttons */}
           <Box sx={{ display: "flex", gap: 1, mt: 2 }}>
-            <img src="src/assets/google1.png" alt="Google Play" style={{ width: "120px" }} />
-            <img src="src/assets/google1.png" alt="App Store" style={{ width: "120px" }} />
+            <img src={google1} alt="Google Play" style={{ width: "120px" }} />
+            <img src={google1} alt="App Store" style={{ width: "120px" }} />
           </Box>
         </Grid>
 
