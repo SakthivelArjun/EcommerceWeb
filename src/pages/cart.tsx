@@ -28,7 +28,7 @@ const Cart: React.FC = () => {
   };
 
   // Calculate total price
-  const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  // const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <Box sx={{ p: 3, mx: "auto" }}>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
 
-const ImageZoom = ({ src, alt }: { src: string; alt: string }) => {
+const ImageZoom = ({ src }: { src: string; alt: string }) => {
   const [zoomPosition, setZoomPosition] = useState({ x: 50, y: 50 });
   const [isHovering, setIsHovering] = useState(false);
 

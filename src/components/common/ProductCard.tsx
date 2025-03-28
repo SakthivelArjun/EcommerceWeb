@@ -35,7 +35,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
   stock,
   onAddToWishlist,
   onToggleCart,
-  isInCart,
 }) => {
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
